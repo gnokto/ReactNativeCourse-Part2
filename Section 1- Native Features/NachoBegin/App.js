@@ -14,16 +14,20 @@ const Link = () => {
   );
 };
 
-const Tweets = () => (
+const Tweets = ({ navigation }) => (
   <Screen>
     <Text>Tweets</Text>
-    <Link />
+    <Button
+      title="Click"
+      onPress={() => navigation.navigate("TweetDetails", { id: 1 })}
+    />
+    {/* <Link /> */}
   </Screen>
 );
 
-const TweetDetails = () => (
+const TweetDetails = ({ route }) => (
   <Screen>
-    <Text>TweetDetails</Text>
+    <Text>TweetDetails {route.params.id}</Text>
   </Screen>
 );
 const Stack = createStackNavigator();
