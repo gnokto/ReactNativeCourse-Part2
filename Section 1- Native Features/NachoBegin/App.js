@@ -11,7 +11,7 @@ export default function App() {
   };
 
   const handleRemove = (uri) => {
-    setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
+    setImageUris(imageUris.filter((imageUri) => imageUri));
   };
 
   return (
