@@ -32,12 +32,14 @@ const get = async (key) => {
       await AsyncStorage.removeItem(prefix + key);
       return null;
     }
+
+    return item.value;
   } catch (error) {
     console.log(error);
   }
-  return item.value;
 };
 
 export default {
   store,
+  get,
 };
