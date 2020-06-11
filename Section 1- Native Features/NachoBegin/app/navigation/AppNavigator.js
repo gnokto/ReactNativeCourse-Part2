@@ -9,15 +9,18 @@ import expoPushTokenApi from "../api/expoPushTokens";
 import FeedNavigator from "./FeedNavigator";
 import ListingEditScreen from "../screens/ListingEditScreen";
 import NewListingButton from "./NewListingButton";
-
 import routes from "./routes";
+import navigation from "../navigation/rootNavigation";
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
   useEffect(() => {
     registerForPushNotifications();
-    Notifications.addListener((notification) => console.log(notification));
+    Notifications.addListener((notification) => {
+      navigation.navigate(routes.ACCOUNT);
+      console.log(notification);
+    });
   }, []);
 
   try {
@@ -52,6 +55,7 @@ const AppNavigator = () => {
               onPress={() => navigation.navigate(routes.LISTING_EDIT)}
             />
           ),
+          // commented this because the NewListingButton is on top of this icon
           // tabBarIcon: ({ color, size }) => (
           //   <MaterialCommunityIcons
           //     name="plus-circle"
