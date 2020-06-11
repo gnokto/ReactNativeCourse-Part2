@@ -9,9 +9,7 @@ import OfflineNotice from "./app/components/OfflineNotice";
 import AuthContext from "./app/auth/context";
 import authStorage from "./app/auth/storage";
 import { navigationRef } from "./app/navigation/rootNavigation";
-import Button from "./app/components/Button";
 import { Notifications } from "expo";
-import Screen from "./app/components/Screen";
 
 export default function App() {
   const [user, setUser] = useState();
@@ -38,16 +36,13 @@ export default function App() {
     );
   };
   return (
-    <Screen>
-      <Button title="tap me" onPress={showNotification} />
-    </Screen>
-    // <>
-    //   <AuthContext.Provider value={{ user, setUser }}>
-    //     <OfflineNotice />
-    //     <NavigationContainer ref={navigationRef} theme={navigationTheme}>
-    //       {user ? <AppNavigator /> : <AuthNavigator />}
-    //     </NavigationContainer>
-    //   </AuthContext.Provider>
-    // </>
+    <>
+      <AuthContext.Provider value={{ user, setUser }}>
+        <OfflineNotice />
+        <NavigationContainer ref={navigationRef} theme={navigationTheme}>
+          {user ? <AppNavigator /> : <AuthNavigator />}
+        </NavigationContainer>
+      </AuthContext.Provider>
+    </>
   );
 }

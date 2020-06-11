@@ -6,13 +6,14 @@ const apiClient = create({
   baseURL: "http://192.168.1.6:9000/api",
 });
 
+// Add auth-token to all requests
 apiClient.addAsyncRequestTransform(async (request) => {
   const authToken = await authStorage.getToken();
   if (!authToken) return;
   request.headers["x-auth-token"] = authToken;
 });
 
-//ovewrite client get method to use cache
+// Overwrite client get method to use cache
 const get = apiClient.get;
 apiClient.get = async (url, params, axiosConfig) => {
   const response = await get(url, params, axiosConfig);
