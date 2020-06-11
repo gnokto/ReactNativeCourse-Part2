@@ -11,29 +11,14 @@ import ListingEditScreen from "../screens/ListingEditScreen";
 import NewListingButton from "./NewListingButton";
 import routes from "./routes";
 import navigation from "../navigation/rootNavigation";
+import useNotifications from "../hooks/useNotifications";
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
-  useEffect(() => {
-    registerForPushNotifications();
-    Notifications.addListener((notification) => {
-      navigation.navigate(routes.ACCOUNT);
-      console.log(notification);
-    });
-  }, []);
-
-  try {
-    registerForPushNotifications = async () => {
-      const permission = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-      if (!permission.granted) return;
-      const token = await Notifications.getExpoPushTokenAsync();
-      expoPushTokenApi.register(token);
-      console.log("registered notification", token);
-    };
-  } catch (error) {
-    console.log("error getting s push token", error);
-  }
+  // on receiving notification - navigating to account screen
+  // dont pass listener if no action required.
+  useNotifications(() => navigation.navigate(routes.ACCOUNT));
 
   return (
     <Tab.Navigator>
