@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
+import logger from "../utility/logger";
 
 import Screen from "../components/Screen";
 import {
@@ -34,7 +35,7 @@ function RegisterScreen() {
       if (result.data) setError(result.data.error);
       else {
         setError("An unexpected error ocurred");
-        console.log(result);
+        logger.log(result);
       }
       return;
     }
