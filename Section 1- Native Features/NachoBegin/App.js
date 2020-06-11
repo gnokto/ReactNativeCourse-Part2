@@ -27,10 +27,15 @@ export default function App() {
       <AppLoading startAsync={restoreUser} onFinish={() => setIsReady(true)} />
     );
   const showNotification = () => {
-    Notifications.presentLocalNotificationAsync({
-      title: "Congratulations",
-      body: "Your order was successfully placed",
-    });
+    Notifications.scheduleLocalNotificationAsync(
+      {
+        title: "Congratulations",
+        body: "Your order was successfully placed",
+      },
+      {
+        time: new Date().getTime() + 3000,
+      }
+    );
   };
   return (
     <Screen>
